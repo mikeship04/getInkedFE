@@ -1,14 +1,20 @@
 import './App.css';
+import Signup from './Components/Signup';
+import Login from './Components/Login';
+import { ChakraProvider } from '@chakra-ui/react'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
-  fetch('http://localhost:4000/hello')
-  .then((res) => res.json())
-  .then(console.log)
-  
+
   return (
-    <div className="App">
-      Welcome to getInked!
-    </div>
+    <ChakraProvider>
+      <BrowserRouter>
+      <Routes>
+        <Route path='/Signup' element={<Signup/>}></Route>
+        <Route path='/Login' element={<Login/>}></Route>
+      </Routes>
+    </BrowserRouter>
+    </ChakraProvider>
   );
 }
 
