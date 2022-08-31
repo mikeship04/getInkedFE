@@ -12,7 +12,7 @@ import * as React from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
-const NavBar = () => {
+const NavBar = ({user, setUser}) => {
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     return (
     <Box as="section" pb={{ base: '12', md: '24' }}>
@@ -22,14 +22,15 @@ const NavBar = () => {
             {isDesktop ? (
                 <Flex justify="space-between" flex="1">
                     <HStack spacing="8">
-                        <Link to='/HomePage'>
-                        <Button variant="ghost">Home</Button>
-                        </Link>
+                        <Link to='/HomePage'><Button variant="ghost">Home</Button></Link>
+                        <Link to='/AuthLogin'><Button variant="ghost">test</Button></Link>
                     </HStack>
                 <HStack spacing="3">
                 <Link to='/Prizes'><Button variant="ghost">Prizes</Button></Link>
                 <Link to='/AboutUs'><Button variant="ghost">About us</Button></Link>
-                <Link to='/Login'><Button variant="ghost">Sign in</Button></Link>
+                {user ? 
+                <Button onClick={e => localStorage.removeItem('token')} variant="primary">Sign out</Button> : 
+                <Link to='/Login'><Button variant="ghost">Sign in</Button></Link>}
                 <Link to='Signup'><Button variant="primary">Sign up</Button></Link>
                 </HStack>
                 </Flex> ) : (
