@@ -5,6 +5,7 @@ import {
     Input,
     Button,
     FormHelperText,
+    Container,
 } from '@chakra-ui/react'
 
 function Signup() {
@@ -14,12 +15,18 @@ function Signup() {
         password: "",
     })
 
+    const userObj = {
+        user: {...formObj}
+    }
+
+    console.log(userObj)
+
     function handleSubmit(e){
         e.preventDefault()
-        fetch('http://localhost:3000/users',{
+        fetch('http://localhost:9292/users',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formObj)
+            body: JSON.stringify(userObj)
         })
         .then(res => {
             res.json().then(console.log)
@@ -31,6 +38,7 @@ function Signup() {
     }
 
 return (
+    <Container maxW='md'>
     <form onSubmit={handleSubmit}>
     <FormControl isRequired>
     <FormLabel>Username</FormLabel>
@@ -40,9 +48,10 @@ return (
     <FormHelperText>We'll never share your email.</FormHelperText>
     <FormLabel>Password</FormLabel>
     <Input id='password' type='password' value={formObj.password} onChange={handleChange}/>
-    <Button mt={4} colorScheme='teal' type='submit'> Submit </Button>
+    <Button mt={4} variant="primary" type='submit'> Submit </Button>
     </FormControl>
     </form>
+    </Container>
 )
 }
 
