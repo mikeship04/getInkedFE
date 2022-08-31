@@ -8,7 +8,7 @@ import {
     Container,
 } from '@chakra-ui/react'
 
-function Signup() {
+function Signup({end}) {
     const [formObj, setFormObj] = useState ({
         username: "",
         email: "",
@@ -19,15 +19,15 @@ function Signup() {
         user: {...formObj}
     }
 
-    console.log(userObj)
-
+//onsubmit setobj back to '' or redirect
     function handleSubmit(e){
         e.preventDefault()
-        fetch('http://localhost:9292/users',{
+        fetch(`${end}/users`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(userObj)
         })
+        //.then(res => res.json().then(console.log))
         .then(res => {
             res.json().then(console.log)
         })

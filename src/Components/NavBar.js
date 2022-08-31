@@ -22,7 +22,7 @@ const NavBar = () => {
             {isDesktop ? (
                 <Flex justify="space-between" flex="1">
                     <HStack spacing="8">
-                        <Link to='/'>
+                        <Link to='/HomePage'>
                         <Button variant="ghost">Home</Button>
                         </Link>
                     </HStack>
