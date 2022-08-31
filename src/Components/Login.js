@@ -9,9 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
-function Login({end}) {
+function Login({end, setUser, user}) {
     let navigate = useNavigate()
-    const [user, setUser] = useState('') //should we add recoil and hoist this?
     const [formObj, setFormObj] = useState ({
         username: "",
         password: ""

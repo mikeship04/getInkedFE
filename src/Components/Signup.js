@@ -20,6 +20,7 @@ function Signup({end}) {
     }
 
 //onsubmit setobj back to '' or redirect
+// need to add signup/login
     function handleSubmit(e){
         e.preventDefault()
         fetch(`${end}/users`,{

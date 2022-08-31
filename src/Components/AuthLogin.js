@@ -9,31 +9,24 @@
 //logout onclick={e => localStorage.removeItem('token')}
 //gh-pages github.com/gitname/react-gh-pages
 import React, {useState} from 'react'
+import useFetchAuth from './lib/useFetchAuth'
 
 function AuthLogin({end}) {
     const [data, setData] = useState('')
+    const fetchData = useFetchAuth(`${end}/me`)
+    // const fetchUSer = useFetchAuth(`#{end}/whatever you wanna get)
 
-    function fetchAuthorized(url) {
-        return fetch(url, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        }).then((res) => res.json())
-    }
-
-    function fetchData() {
-        fetchAuthorized(`${end}/me`).then((json) =>
-        setData(JSON.stringify(json))
-        )
+    function handleFetchData() {
+        fetchData().then((json) =>setData(JSON.stringify(json)))
         setData('whatever we get back')
     }
 
-  return (
+return (
     <div>
-    <button onClick={fetchData}>fetch</button>
+    <button onClick={handleFetchData}>fetch</button>
     <div>{data}</div>
     </div>
-  )
+)
 }
 
 export default AuthLogin
