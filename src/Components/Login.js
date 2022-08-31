@@ -5,9 +5,13 @@ import {
     Input,
     Button,
     Container,
+    Text
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({end}) {
+    let navigate = useNavigate()
+    const [user, setUser] = useState('') //should we add recoil and hoist this?
     const [formObj, setFormObj] = useState ({
         username: "",
         password: ""
@@ -19,15 +23,18 @@ function Login() {
 
     function handleSubmit(e){
         e.preventDefault()
-        fetch('http://localhost:9292/login',{
+        fetch(`${end}/login`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(userObj)
         })
         .then(res => {
             res.json()
-            .then(console.log)
-            .then(localStorage.token = res.jwt)
+            .then(json => {
+                setUser(json.user.username)
+                localStorage.setItem('token', json.jwt)
+                navigate('/HomePage')
+            })
         })
     }
 
@@ -37,6 +44,7 @@ function Login() {
 
 return (
     <Container maxW='md'>
+    {user? <Text fontSize='2xl'>welcome back {user}</Text> : <Text fontSize='2xl'>Please log in!</Text>}
     <form onSubmit={handleSubmit}>
     <FormControl isRequired>
     <FormLabel>Username</FormLabel>
