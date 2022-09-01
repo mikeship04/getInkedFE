@@ -11,7 +11,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { theme } from '@chakra-ui/pro-theme'
 import '@fontsource/inter/variable.css'
 import { Routes, Route } from "react-router-dom"
-const ENDPOINT = process.env.NODE_ENV === 'production' ? 'https://getinkedapp.herokuapp.com/' : 'http://localhost:9292'
+const ENDPOINT = process.env.NODE_ENV === 'production' ? 'https://getinkedapp.herokuapp.com/' : 'http://localhost:9292/'
 
 function App() {
   const [user, setUser] = useState('')
@@ -54,12 +54,12 @@ function App() {
     <ChakraProvider theme={myTheme}>
       <NavBar handleLogout={handleLogout} user={user}/>
       <Routes>
-        <Route path='/Signup' element={<Signup setUser={setUser} end={ENDPOINT} theme={myTheme}/>}></Route>
-        <Route path='/Login' element={<Login user={user} setUser={setUser} end={ENDPOINT} theme={myTheme}/>}></Route>
-        <Route path='/AboutUs' element={<AboutUs theme={myTheme}/>}></Route>
-        <Route path='/Prizes' element={<Prizes theme={myTheme}/>}></Route>
-        <Route path='/HomePage' element={<HomePage user={user} theme={myTheme}/>}></Route>
-        <Route path='/AuthLogin' element={<AuthLogin end={ENDPOINT} theme={myTheme}/>}></Route>
+        <Route path='/Signup' element={<Signup setUser={setUser} end={ENDPOINT} />}></Route>
+        <Route path='/Login' element={<Login user={user} setUser={setUser} end={ENDPOINT} />}></Route>
+        <Route path='/AboutUs' element={<AboutUs />}></Route>
+        <Route path='/Prizes' element={<Prizes end={ENDPOINT} />}></Route>
+        <Route path='/HomePage' element={<HomePage user={user} end={ENDPOINT} />}></Route>
+        <Route path='/AuthLogin' element={<AuthLogin end={ENDPOINT} />}></Route>
       </Routes>
     </ChakraProvider>
   );

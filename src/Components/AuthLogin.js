@@ -12,6 +12,7 @@ import React, {useState} from 'react'
 import useFetchAuth from './lib/useFetchAuth'
 
 function AuthLogin({end}) {
+    
     const [data, setData] = useState('')
     const fetchData = useFetchAuth(`${end}/me`)
     // const fetchUSer = useFetchAuth(`#{end}/whatever you wanna get)
