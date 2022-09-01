@@ -17,8 +17,7 @@ function AuthLogin({end}) {
     // const fetchUSer = useFetchAuth(`#{end}/whatever you wanna get)
 
     function handleFetchData() {
-        fetchData().then((json) =>setData(JSON.stringify(json)))
-        setData('whatever we get back')
+        fetchData().then((json) => setData(json.user.username))
     }
 
 return (
