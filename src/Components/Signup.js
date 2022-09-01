@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
     FormControl,
     FormLabel,
@@ -8,7 +9,7 @@ import {
     Container,
 } from '@chakra-ui/react'
 
-function Signup({end}) {
+function Signup({end, setUser}) {
     const [formObj, setFormObj] = useState ({
         username: "",
         email: "",
@@ -18,9 +19,8 @@ function Signup({end}) {
     const userObj = {
         user: {...formObj}
     }
+    let navigate = useNavigate()
 
-//onsubmit setobj back to '' or redirect
-// need to add signup/login
     function handleSubmit(e){
         e.preventDefault()
         fetch(`${end}/users`,{
@@ -28,9 +28,21 @@ function Signup({end}) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(userObj)
         })
-        //.then(res => res.json().then(console.log))
-        .then(res => {
-            res.json().then(console.log)
+        .then((res) => res.json())
+        .then((res) => {
+            if ((res.user)) {
+                fetch(`${end}/login`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userObj)
+                })
+                .then((res) => res.json())
+                .then((res) => {
+                    localStorage.setItem('token', res.jwt)
+                    setUser(res.user.username)
+                    navigate('/HomePage')
+                })
+            }
         })
     }
 

@@ -12,7 +12,7 @@ import * as React from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
-const NavBar = ({user, setUser}) => {
+const NavBar = ({user, handleLogout}) => {
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     return (
     <Box as="section" pb={{ base: '12', md: '24' }}>
@@ -29,7 +29,7 @@ const NavBar = ({user, setUser}) => {
                 <Link to='/Prizes'><Button variant="ghost">Prizes</Button></Link>
                 <Link to='/AboutUs'><Button variant="ghost">About us</Button></Link>
                 {user ? 
-                <Button onClick={e => localStorage.removeItem('token')} variant="primary">Sign out</Button> : 
+                <Button onClick={handleLogout} variant="primary">Sign out</Button> : 
                 <Link to='/Login'><Button variant="ghost">Sign in</Button></Link>}
                 <Link to='Signup'><Button variant="primary">Sign up</Button></Link>
                 </HStack>
