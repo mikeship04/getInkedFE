@@ -11,16 +11,9 @@ import {
     IconButton,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@chakra-ui/react'
 import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube } from 'react-icons/fa'
-
-interface FeatureProps {
-    text: string;
-    iconBg: string;
-    icon?: ReactElement;
-}
 
 function Insta() {
     return <Icon as={FaInstagram} />
@@ -38,7 +31,7 @@ function Youtube() {
     return <Icon as={FaYoutube} />
 }
 
-const Feature = ({ text, icon, iconBg }: FeatureProps) => {
+const Feature = ({ text, icon, iconBg }) => {
     return (
         <Stack direction={'row'} align={'center'}>
         <Flex

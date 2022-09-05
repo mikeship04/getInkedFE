@@ -8,6 +8,7 @@ function HomePage({user, end, theme}) {
     
     useEffect(() => {
         fetchArtists().then(setArtists)
+        // eslint-disable-next-line
     },[])
 
     const renderArtists = artists.map(artist => {
