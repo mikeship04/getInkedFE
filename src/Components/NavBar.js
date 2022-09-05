@@ -23,7 +23,7 @@ const NavBar = ({user, handleLogout}) => {
                 <Flex justify="space-between" flex="1">
                     <HStack spacing="8">
                         <Link to='/HomePage'><Button variant="ghost">Home</Button></Link>
-                        <Link to='/AuthLogin'><Button variant="ghost">test</Button></Link>
+                        {/* <Link to='/AuthLogin'><Button variant="ghost">test</Button></Link> */}
                     </HStack>
                 <HStack spacing="3">
                 <Link to='/Prizes'><Button variant="ghost">Prizes</Button></Link>

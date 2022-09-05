@@ -8,6 +8,7 @@ function Prizes({end}) {
 
   useEffect(() => {
     fetchPrizes().then(setPrizes)
+    // eslint-disable-next-line
   },[])
 
   const renderPrizes = prizes.map(prize => {
@@ -18,7 +19,7 @@ function Prizes({end}) {
   })
 
   return (
-    <div>{renderPrizes}</div>
+    <div>{renderPrizes[0]}</div>
   )
 }
 
