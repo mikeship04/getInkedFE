@@ -18,7 +18,7 @@ function PrizeCards({prize}) {
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
                 as={'span'}
-                position={'relative'}
+                position={'static'}
                 _after={{
                 content: "''",
                 width: 'full',
@@ -26,7 +26,6 @@ function PrizeCards({prize}) {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'purple.400',
                 zIndex: -1,
                 }}>
                 {prize.header}
@@ -45,6 +44,7 @@ function PrizeCards({prize}) {
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
+                position={'static'}
                 rounded={'full'}
                 variant='primary'
                 _hover={{
@@ -58,7 +58,8 @@ function PrizeCards({prize}) {
         <Flex flex={1}>
         <Image
             alt={'Login Image'}
-           // position={'fixed'}
+            boxSize='1000px'
+            position={'fixed'}
             objectFit={'cover'}
             src={prize.img_url}
         />

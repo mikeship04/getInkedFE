@@ -7,12 +7,10 @@ import { useRecoilValue } from 'recoil'
 function Prizes({end}) {
   const [prizes, setPrizes] = useState([])
   const artistId = useRecoilValue(artistState)
-  const fetchPrizes = useFetchAuth(`${end}/giveaways`)
+  const fetchPrizes = useFetchAuth(`${end}/artists/${artistId}`)
 
-  console.log(prizes)
   useEffect(() => {
     fetchPrizes().then(setPrizes)
-    console.log(artistId)
     //eslint-disable-next-line
   },[])
 
