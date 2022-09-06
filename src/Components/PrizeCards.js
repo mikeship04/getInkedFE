@@ -58,7 +58,7 @@ function PrizeCards({prize}) {
         <Flex flex={1}>
         <Image
             alt={'Login Image'}
-            // position={'fixed'}
+           // position={'fixed'}
             objectFit={'cover'}
             src={prize.img_url}
         />
@@ -109,12 +109,12 @@ function PrizeCards({prize}) {
         </Stack>
         </Flex>
         <Flex flex={1}>
-        <Image
+        {/* <Image
             alt={'Login Image'}
             // position={'fixed'}
             objectFit={'cover'}
             src={prize.img_url}
-        />            
+        />             */}
         </Flex>
         </Stack>
         </>

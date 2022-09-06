@@ -11,8 +11,11 @@ import {
 import * as React from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import { userState } from './atom'
 
-const NavBar = ({user, handleLogout}) => {
+const NavBar = ({handleLogout}) => {
+    const user = useRecoilValue(userState)
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     return (
     <Box as="section" pb={{ base: '12', md: '24' }}>
@@ -23,7 +26,7 @@ const NavBar = ({user, handleLogout}) => {
                 <Flex justify="space-between" flex="1">
                     <HStack spacing="8">
                         <Link to='/HomePage'><Button variant="ghost">Home</Button></Link>
-                        {/* <Link to='/AuthLogin'><Button variant="ghost">test</Button></Link> */}
+                        {user.admin ? <Link to='/AddArtist'><Button variant="ghost">Add artist</Button></Link> : null}
                     </HStack>
                 <HStack spacing="3">
                 <Link to='/Prizes'><Button variant="ghost">Prizes</Button></Link>

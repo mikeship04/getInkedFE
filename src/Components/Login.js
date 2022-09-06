@@ -7,10 +7,14 @@ import {
     Container,
     Text
 } from '@chakra-ui/react'
+import {userState} from './atom'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 
-function Login({end, setUser, user}) {
+function Login({end}) {
     let navigate = useNavigate()
+    const setUserState = useSetRecoilState(userState)
+    const user = useRecoilValue(userState)
     const [formObj, setFormObj] = useState ({
         username: "",
         password: ""
@@ -30,7 +34,7 @@ function Login({end, setUser, user}) {
         .then(res => {
             res.json()
             .then(json => {
-                setUser(json.user.username)
+                setUserState(json.user)
                 localStorage.setItem('token', json.jwt)
                 navigate('/HomePage')
             })
@@ -43,7 +47,7 @@ function Login({end, setUser, user}) {
 
 return (
     <Container maxW='md'>
-    {user? <Text fontSize='2xl'>welcome back {user}</Text> : <Text fontSize='2xl'>Please log in!</Text>}
+    {user? <Text fontSize='2xl'>welcome back {user.username}</Text> : <Text fontSize='2xl'>Please log in!</Text>}
     <form onSubmit={handleSubmit}>
     <FormControl isRequired>
     <FormLabel>Username</FormLabel>

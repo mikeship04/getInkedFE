@@ -13,6 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@chakra-ui/react'
+import { artistState } from './atom';
+import { useSetRecoilState } from 'recoil';
 import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube } from 'react-icons/fa'
 
 function Insta() {
@@ -31,7 +33,7 @@ function Youtube() {
     return <Icon as={FaYoutube} />
 }
 
-const Feature = ({ text, icon, iconBg }) => {
+const Feature = ({ text, icon }) => {
     return (
         <Stack direction={'row'} align={'center'}>
         <Flex
@@ -39,8 +41,7 @@ const Feature = ({ text, icon, iconBg }) => {
         h={8}
         align={'center'}
         justify={'center'}
-        rounded={'full'}
-        bg={iconBg}>
+        rounded={'full'}>
         {icon}
         </Flex>
         <Text fontWeight={600}>{text}</Text>
@@ -49,9 +50,11 @@ const Feature = ({ text, icon, iconBg }) => {
 };
 
 function Artists({artist}) {
+    const setArtistId = useSetRecoilState(artistState)
     let navigate = useNavigate()
     
     function handleNav() {
+        setArtistId(artist.id)
         navigate('/prizes')
     }
 
@@ -91,7 +94,6 @@ function Artists({artist}) {
                 text='Youtube'
             /> : null}
             <Feature icon={<IconButton onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
-                // iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text='Check out this 🔥 Prize!' />
             </Stack>
         </Stack>

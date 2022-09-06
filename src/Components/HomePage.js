@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useFetchAuth from './lib/useFetchAuth'
 import ArtistCards from './ArtistCards'
 
-function HomePage({user, end, theme}) {
+function HomePage({end}) {
     const [artists, setArtists] = useState([])
     const fetchArtists = useFetchAuth(`${end}/artists`)
     

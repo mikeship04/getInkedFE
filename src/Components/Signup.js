@@ -8,8 +8,11 @@ import {
     FormHelperText,
     Container,
 } from '@chakra-ui/react'
+import { userState } from './atom'
+import {useSetRecoilState} from 'recoil'
 
-function Signup({end, setUser}) {
+function Signup({end}) {
+    const setUserState = useSetRecoilState(userState)
     const [formObj, setFormObj] = useState ({
         username: "",
         email: "",
@@ -39,7 +42,7 @@ function Signup({end, setUser}) {
                 .then((res) => res.json())
                 .then((res) => {
                     localStorage.setItem('token', res.jwt)
-                    setUser(res.user.username)
+                    setUserState(res.user)
                     navigate('/HomePage')
                 })
             }
