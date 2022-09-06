@@ -72,34 +72,35 @@ function Artists({artist}) {
                 <StackDivider borderColor={useColorModeValue('gray.100', 'gray.700')}/>}>
             <Feature icon={
                 <Link href={artist.instagram} isExternal>
-                    <IconButton aria-label='Search database' icon={<Insta />} />
+                    <IconButton position={'static'} aria-label='Search database' icon={<Insta />} />
                 </Link>}
                 text='Instagram'/>
             {artist.facebook ? <Feature icon={
                 <Link href={artist.facebook} isExternal>
-            <IconButton aria-label='Search database' icon={<Facebook />} />
+            <IconButton position={'static'} aria-label='Search database' icon={<Facebook />} />
             </Link>}
                 text='Facebook'
             /> : null}
             {artist.twitter ? <Feature icon={
                 <Link href={artist.twitter} isExternal>
-            <IconButton aria-label='Search database' icon={<Twitter />} />
+            <IconButton position={'static'} aria-label='Search database' icon={<Twitter />} />
             </Link>}
                 text='Twitter'
             /> : null}
             {artist.youtube ? <Feature icon={
                 <Link href={artist.youtube} isExternal>
-            <IconButton aria-label='Search database' icon={<Youtube />} />
+            <IconButton position={'static'} aria-label='Search database' icon={<Youtube />} />
             </Link>}
                 text='Youtube'
             /> : null}
-            <Feature icon={<IconButton onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
+            <Feature icon={<IconButton position={'static'} onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
                 text='Check out this 🔥 Prize!' />
             </Stack>
         </Stack>
         <Flex>
             <Image
             rounded={'md'}
+            boxSize='450px'
             alt={'feature image'}
             src={artist.img_url}
             objectFit={'cover'}

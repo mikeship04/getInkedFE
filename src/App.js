@@ -7,10 +7,12 @@ import AboutUs from './Components/AboutUs';
 import Prizes from './Components/Prizes';
 import HomePage from './Components/HomePage';
 import AddArtist from './Components/AddArtist';
+import Profile from './Components/Profile';
+import ProfileEdit from './Components/ProfileEdit';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { theme } from '@chakra-ui/pro-theme'
 import '@fontsource/inter/variable.css'
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import { userState } from './Components/atom';
 import {
   useSetRecoilState,
@@ -18,6 +20,7 @@ import {
 const ENDPOINT = process.env.NODE_ENV === 'production' ? 'https://getinkedapp.herokuapp.com/' : 'http://localhost:9292/'
 
 function App() {
+  let navigate = useNavigate()
   const setUserState = useSetRecoilState(userState)
   const myTheme = extendTheme(
     {
@@ -47,12 +50,13 @@ function App() {
       body: JSON.stringify({ jwt: token}),
     })
     .then((res) => res.json())
-    .then((u) => setUserState(u))
+    .then((json) => setUserState(json))
   }
 
   function handleLogout() {
     setUserState('')
     localStorage.removeItem('token')
+    navigate('/Login')
   }
 
   return (
@@ -61,6 +65,8 @@ function App() {
       <Routes>
         <Route path='/Signup' element={<Signup end={ENDPOINT} />}></Route>
         <Route path='/Login' element={<Login end={ENDPOINT} />}></Route>
+        <Route path='/Profile' element={<Profile end={ENDPOINT} />}></Route>
+        <Route path='/ProfileEdit' element={<ProfileEdit end={ENDPOINT} />}></Route>
         <Route path='/AboutUs' element={<AboutUs />}></Route>
         <Route path='/Prizes' element={<Prizes end={ENDPOINT} />}></Route>
         <Route path='/HomePage' element={<HomePage end={ENDPOINT} />}></Route>

@@ -19,7 +19,7 @@ const NavBar = ({handleLogout}) => {
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     return (
     <Box as="section" pb={{ base: '12', md: '24' }}>
-        <Box as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
+        <Box position='fixed' width='100%' as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
         <Container py={{ base: '4', lg: '5' }}>
             <HStack spacing="10" justify="space-between">
             {isDesktop ? (
@@ -28,13 +28,13 @@ const NavBar = ({handleLogout}) => {
                         <Link to='/HomePage'><Button variant="ghost">Home</Button></Link>
                         {user.admin ? <Link to='/AddArtist'><Button variant="ghost">Add artist</Button></Link> : null}
                     </HStack>
-                <HStack spacing="3">
-                <Link to='/Prizes'><Button variant="ghost">Prizes</Button></Link>
-                <Link to='/AboutUs'><Button variant="ghost">About us</Button></Link>
+                <HStack spacing="6">
+                {user ? <Link to='/Profile'><Button variant="ghost">My Profile</Button></Link> : null}
+                    <Link to='/AboutUs'><Button variant="ghost">About us</Button></Link>
                 {user ? 
-                <Button onClick={handleLogout} variant="primary">Sign out</Button> : 
-                <Link to='/Login'><Button variant="ghost">Sign in</Button></Link>}
-                <Link to='Signup'><Button variant="primary">Sign up</Button></Link>
+                    <Button onClick={handleLogout} variant="primary">Sign out</Button> : 
+                    <Link to='/Login'><Button variant="ghost">Sign in</Button></Link>}
+                    <Link to='Signup'><Button variant="primary">Sign up</Button></Link>
                 </HStack>
                 </Flex> ) : (
                 <IconButton
