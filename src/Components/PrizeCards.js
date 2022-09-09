@@ -8,6 +8,7 @@ import {
     Text,
     useBreakpointValue,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 function PrizeCards({prize}) {
     return (
@@ -43,6 +44,7 @@ function PrizeCards({prize}) {
                 going to insert a bunch of random text to see what it looks like when we run off screen.
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+                <Link to='/BuyTickets'>
             <Button
                 position={'static'}
                 rounded={'full'}
@@ -52,6 +54,7 @@ function PrizeCards({prize}) {
                 }}>
                 Purchase tickets
             </Button>
+            </Link>
             </Stack>
         </Stack>
         </Flex>

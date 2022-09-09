@@ -9,6 +9,7 @@ import HomePage from './Components/HomePage';
 import AddArtist from './Components/AddArtist';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
+import BuyTicketPage from './Components/BuyTicketPage';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { theme } from '@chakra-ui/pro-theme'
 import '@fontsource/inter/variable.css'
@@ -31,7 +32,7 @@ function App() {
 
   useEffect(() => {
     let token = localStorage.token
-    if(typeof token !== "undefined" && token.length > 1) {
+    if(typeof token !== 'undefined' && token.length > 1) {
       tokenLogin(token)
     } else {
       console.log('no token found, try logging in!')
@@ -50,7 +51,7 @@ function App() {
       body: JSON.stringify({ jwt: token}),
     })
     .then((res) => res.json())
-    .then((json) => setUserState(json))
+    .then((u) => setUserState(u))
   }
 
   function handleLogout() {
@@ -68,6 +69,7 @@ function App() {
         <Route path='/Profile' element={<Profile end={ENDPOINT} />}></Route>
         <Route path='/ProfileEdit' element={<ProfileEdit end={ENDPOINT} />}></Route>
         <Route path='/AboutUs' element={<AboutUs />}></Route>
+        <Route path='/BuyTickets' element={<BuyTicketPage end={ENDPOINT} />}></Route>
         <Route path='/Prizes' element={<Prizes end={ENDPOINT} />}></Route>
         <Route path='/HomePage' element={<HomePage end={ENDPOINT} />}></Route>
         <Route path='/AddArtist' element={<AddArtist end={ENDPOINT} />}></Route>
