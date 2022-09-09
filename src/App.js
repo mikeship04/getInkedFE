@@ -18,7 +18,7 @@ import { userState } from './Components/atom';
 import {
   useSetRecoilState,
 } from 'recoil';
-const ENDPOINT = process.env.NODE_ENV == 'production' ? 'https://getinkedapp.herokuapp.com' : 'http://localhost:9292'
+const ENDPOINT = process.env.NODE_ENV === 'production' ? 'https://getinkedapp.herokuapp.com' : 'http://localhost:9292'
 
 function App() {
   let navigate = useNavigate()
