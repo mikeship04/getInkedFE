@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from '@chakra-ui/react'
 import { artistState } from './atom';
 import { useSetRecoilState } from 'recoil';
-import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube } from 'react-icons/fa'
+import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube, FaEdit } from 'react-icons/fa'
 
 function Insta() {
     return <Icon as={FaInstagram} />
@@ -31,6 +31,9 @@ function Pointer() {
 }
 function Youtube() {
     return <Icon as={FaYoutube} />
+}
+function Edit() {
+    return <Icon as={FaEdit} />
 }
 
 const Feature = ({ text, icon }) => {
@@ -95,6 +98,8 @@ function Artists({artist}) {
             /> : null}
             <Feature icon={<IconButton position={'static'} onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
                 text='Check out this 🔥 Prize!' />
+                <Feature icon={<IconButton position={'static'} aria-label='Search database' icon={<Edit />} />}
+                text='Click here to edit artist info!' />
             </Stack>
         </Stack>
         <Flex>
