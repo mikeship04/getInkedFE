@@ -13,9 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@chakra-ui/react'
-import { artistState } from './atom';
-import { useSetRecoilState } from 'recoil';
-import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube, FaEdit } from 'react-icons/fa'
+import { artistState, artistIdState } from './atom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { FaInstagram, FaTwitter, FaFacebook, FaRegHandPointRight, FaYoutube, FaEdit, FaTrashAlt } from 'react-icons/fa'
+import { userState, prizeState } from './atom'
 
 function Insta() {
     return <Icon as={FaInstagram} />
@@ -35,6 +36,9 @@ function Youtube() {
 function Edit() {
     return <Icon as={FaEdit} />
 }
+function Delete() {
+    return <Icon as={FaTrashAlt} />
+}
 
 const Feature = ({ text, icon }) => {
     return (
@@ -52,13 +56,30 @@ const Feature = ({ text, icon }) => {
     );
 };
 
-function Artists({artist}) {
-    const setArtistId = useSetRecoilState(artistState)
+function Artists({artist, end, deleteArtist }) {
+    const user = useRecoilValue(userState)
+    const setArtistId = useSetRecoilState(artistIdState)
+    const setArtist = useSetRecoilState(artistState)
+    const setPrize = useSetRecoilState(prizeState)
     let navigate = useNavigate()
     
     function handleNav() {
         setArtistId(artist.id)
+        setPrize(artist.Giveaways)
         navigate('/prizes')
+    }
+
+    function handleEdit() {
+        setArtist(artist)
+        setArtistId(artist.id)
+        navigate('/EditArtist')
+    }
+
+    function handleDelete() {
+        fetch(`${end}/artists/${artist.id}`, {
+            method: 'DELETE',
+        })
+        .then(deleteArtist(artist.id))
     }
 
     return (
@@ -73,11 +94,12 @@ function Artists({artist}) {
             spacing={4}
             divider={
                 <StackDivider borderColor={useColorModeValue('gray.100', 'gray.700')}/>}>
-            <Feature icon={
+            {artist.instagram ? <Feature icon={
                 <Link href={artist.instagram} isExternal>
                     <IconButton position={'static'} aria-label='Search database' icon={<Insta />} />
                 </Link>}
-                text='Instagram'/>
+                text='Instagram'
+                /> :null}
             {artist.facebook ? <Feature icon={
                 <Link href={artist.facebook} isExternal>
             <IconButton position={'static'} aria-label='Search database' icon={<Facebook />} />
@@ -96,10 +118,12 @@ function Artists({artist}) {
             </Link>}
                 text='Youtube'
             /> : null}
-            <Feature icon={<IconButton position={'static'} onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
-                text='Check out this 🔥 Prize!' />
-                <Feature icon={<IconButton position={'static'} aria-label='Search database' icon={<Edit />} />}
-                text='Click here to edit artist info!' />
+            {artist.Giveaways.length > 0 ? <Feature icon={<IconButton position={'static'} onClick={handleNav} aria-label='Search database' icon={<Pointer />} />}
+                text='Check out this 🔥 Prize!' /> : null}
+            {user.admin ? <Feature icon={<IconButton position={'static'} onClick={handleEdit} aria-label='Search database' icon={<Edit />} />}
+                text='Click here to edit artist info!' /> : null}
+            {user.admin ? <Feature icon={<IconButton position={'static'} onClick={handleDelete} aria-label='Search database' icon={<Delete />} />}
+                text='Click here to remove this Artist!' /> : null}
             </Stack>
         </Stack>
         <Flex>

@@ -39,21 +39,21 @@ function PrizeCards({prize}) {
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
             {prize.full_details} ending on : {prize.closing_date}
             </Text>
-            <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-                going to insert a bunch of random text to see what it looks like when we run off screen.
-                going to insert a bunch of random text to see what it looks like when we run off screen.
-            </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
                 <Link to='/BuyTickets'>
             <Button
                 position={'static'}
                 rounded={'full'}
                 variant='primary'
-                _hover={{
-                bg: 'blue.500',
-                }}>
+                // _hover={{
+                // bg: 'blue.500',
+                // }}
+                >
                 Purchase tickets
             </Button>
+            </Link>
+            <Link to='/EditPrizes'>
+            <Button rounded={'full'} variant='primary'>Edit Prize</Button>
             </Link>
             </Stack>
         </Stack>
@@ -113,12 +113,6 @@ function PrizeCards({prize}) {
         </Stack>
         </Flex>
         <Flex flex={1}>
-        {/* <Image
-            alt={'Login Image'}
-            // position={'fixed'}
-            objectFit={'cover'}
-            src={prize.img_url}
-        />             */}
         </Flex>
         </Stack>
         </>

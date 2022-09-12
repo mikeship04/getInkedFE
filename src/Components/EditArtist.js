@@ -7,18 +7,22 @@ import {
     Container,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { artistState, artistIdState } from './atom';
+import { useRecoilValue } from 'recoil';
 
-function AddArtist({end}) {
+function EditArtist({end}) {
     let navigate = useNavigate()
+    let artist = useRecoilValue(artistState)
+    let artistId = useRecoilValue(artistIdState)
     const [formObj, setFormObj] = useState ({
-        bio: "",
-        name: "",
-        img_url: "",
-        instagram: "",
-        twitter: "",
-        tiktok: "",
-        facebook: "",
-        youtube: ""
+        bio: `${artist.bio}`,
+        name: `${artist.name}`,
+        img_url: `${artist.img_url}`,
+        instagram: `${artist.instagram}`,
+        twitter: `${artist.twitter}`,
+        tiktok: `${artist.tiktok}`,
+        facebook: `${artist.facebook}`,
+        youtube: `${artist.youtube}`
     })
 
     const artistObj = {
@@ -27,8 +31,8 @@ function AddArtist({end}) {
 
     function handleSubmit(e){
         e.preventDefault()
-        fetch(`${end}/artists`, {
-            method: 'POST',
+        fetch(`${end}/artists/${artistId}`, {
+            method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(artistObj)
         })
@@ -60,11 +64,11 @@ return (
     <Input id='faceboko' type='facebook' value={formObj.facebook} onChange={handleChange} />
     <FormLabel>Youtube Link</FormLabel>
     <Input id='youtube' type='youtube' value={formObj.youtube} onChange={handleChange} />
-    <Button mt={4} variant="primary" type='submit'> Add Artist </Button>
+    <Button mt={4} variant="primary" type='submit'> Edit Artist </Button>
     </FormControl>
     </form>
     </Container>
 )
 }
 
-export default AddArtist
+export default EditArtist

@@ -11,13 +11,26 @@ function HomePage({end}) {
         // eslint-disable-next-line
     },[])
 
+    function deleteArtist(id) {
+        const deletedArtists = artists.filter((a) => {
+            if (a.id === id) {
+                return false
+            } else {
+                return true
+            }
+        })
+        setArtists(deletedArtists)
+    }
+
     const renderArtists = artists.map(artist => {
         return <ArtistCards
         key={artist.id}
         artist={artist}
+        deleteArtist={deleteArtist}
+        end={end}
         />
     })
-
+    
 return (
     <div>{renderArtists}</div>
 )
