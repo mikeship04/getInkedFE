@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import useFetchAuth from './lib/useFetchAuth'
 import PrizeCards from './PrizeCards'
-import {artistState} from './atom'
-import { useRecoilValue } from 'recoil'
+import {artistIdState, prizeState } from './atom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 function Prizes({end}) {
-  const [prizes, setPrizes] = useState([])
-  const artistId = useRecoilValue(artistState)
+  const setPrizes = useSetRecoilState(prizeState)
+  const prizes = useRecoilValue(prizeState)
+  const artistId = useRecoilValue(artistIdState)
   const fetchPrizes = useFetchAuth(`${end}/artists/${artistId}`)
 
   useEffect(() => {
