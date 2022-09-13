@@ -10,7 +10,6 @@ import AddArtist from './Components/AddArtist';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
 import EditArtist from './Components/EditArtist';
-import BuyTicketPage from './Components/BuyTicketPage';
 import EditPrizes from './Components/EditPrizes';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { theme } from '@chakra-ui/pro-theme'
@@ -71,7 +70,6 @@ function App() {
         <Route path='/Profile' element={<Profile end={ENDPOINT} />}></Route>
         <Route path='/ProfileEdit' element={<ProfileEdit end={ENDPOINT} />}></Route>
         <Route path='/AboutUs' element={<AboutUs />}></Route>
-        <Route path='/BuyTickets' element={<BuyTicketPage end={ENDPOINT} />}></Route>
         <Route path='/Prizes' element={<Prizes end={ENDPOINT} />}></Route>
         <Route path='/HomePage' element={<HomePage end={ENDPOINT} />}></Route>
         <Route path='/AddArtist' element={<AddArtist end={ENDPOINT} />}></Route>
