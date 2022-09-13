@@ -7,15 +7,27 @@ import {
     Stack,
     Text,
     useBreakpointValue,
+    Wrap,
+    WrapItem
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import TicketButton from './TicketButton'
 
-function PrizeCards({prize}) {
+function PrizeCards({prize, tickets, handleBuy}) {
+
+    const renderTicketButton = tickets.map(ticket => {
+        return <TicketButton
+        handleBuy={handleBuy}
+        key={ticket.id}
+        ticket={ticket}
+        />
+    })
+
     return (
         <>
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
-        <Stack spacing={6} w={'full'} maxW={'lg'}>
+        <Stack spacing={8} w={'full'} maxW={'lg'}>
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
                 as={'span'}
@@ -39,22 +51,13 @@ function PrizeCards({prize}) {
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
             {prize.full_details} ending on : {prize.closing_date}
             </Text>
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-                <Link to='/BuyTickets'>
-            <Button
-                position={'static'}
-                rounded={'full'}
-                variant='primary'
-                // _hover={{
-                // bg: 'blue.500',
-                // }}
-                >
-                Purchase tickets
-            </Button>
-            </Link>
-            <Link to='/EditPrizes'>
-            <Button rounded={'full'} variant='primary'>Edit Prize</Button>
-            </Link>
+            <Stack direction='column'>
+            <Wrap spacing={4}>
+                {renderTicketButton}
+                <WrapItem>
+                    <Link to='/EditPrizes'><Button rounded={'full'} variant='primary'>Edit Prize</Button></Link>
+                </WrapItem>
+                </Wrap>
             </Stack>
         </Stack>
         </Flex>
