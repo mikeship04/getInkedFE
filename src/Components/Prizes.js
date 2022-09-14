@@ -1,13 +1,16 @@
 import React, { useEffect, useState} from 'react'
 import useFetchAuth from './lib/useFetchAuth'
 import PrizeCards from './PrizeCards'
-import {artistIdState, prizeState } from './atom'
+import {artistIdState, prizeState,userState } from './atom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
 
 function Prizes({end}) {
   const [tickets, setTickets] = useState([])
   const setPrizes = useSetRecoilState(prizeState)
   const prizes = useRecoilValue(prizeState)
+  const user = useRecoilValue(userState)
+  let navigate = useNavigate()
   const prizeId= prizes[0].id
   const artistId = useRecoilValue(artistIdState)
   const fetchPrizes = useFetchAuth(`${end}/artists/${artistId}`)
@@ -20,7 +23,7 @@ function Prizes({end}) {
         body: JSON.stringify({id})
     })
     .then(res => res.json())
-    .then(data => window.location = (data.url))
+    .then(data => {user ? window.location = (data.url) : navigate('/Signup')})
 }
 
   useEffect(() => {
