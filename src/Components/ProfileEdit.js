@@ -6,13 +6,28 @@ import {
     Button,
     Container,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import { userState } from './atom'
 
-// changes available = username, email, profile photo?
-function ProfileEdit() {
+function ProfileEdit({end}) {
+    let navigate = useNavigate()
+    const user = useRecoilValue(userState)
     const [formObj, setFormObj] = useState ({
         username: "",
         email: "",
     })
+
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch(`${end}/users/${user.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userObj)
+        })
+        .then((res) => res.json())
+        navigate('/HomePage')
+    }
 
     const userObj = {
         user: {...formObj}
@@ -24,8 +39,7 @@ function ProfileEdit() {
 
 return (
     <Container maxW='md'>
-    <form >
-    {/* onSubmit={handleSubmit} */}
+    <form  onSubmit={handleSubmit}>
     <FormControl isRequired>
     <FormLabel>Username</FormLabel>
     <Input id='username' type='username' value={formObj.username} onChange={handleChange} />
